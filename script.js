@@ -8,9 +8,6 @@ var div;
 var newbook;
 var index;
 
-
-
-
 var myLibrary = [
 
   {
@@ -48,13 +45,11 @@ class Book{
   }
 }
 
-function EditStatus(value) {
+function EditStatus(book) {
   
   this.read = value;
 
 }
-
-EditStatus.prototype = Object.create(Book.prototype);
 
 
 function inicial(myLibrary){
@@ -199,16 +194,20 @@ function listenClicks() {
         }
         else if(target.id.includes('edit')) {
           index = (target.id).substr(-1);
-          EditStatus(index);
+          if(myLibrary[index].read === "yes"){
+            myLibrary[index].read = "no";
+          }
+          else{
+            myLibrary[index].read = "yes";
+          }
+          //Update field read Book
+          div = document.querySelector('.read'+index);
+          div.textContent = "Read:"+myLibrary[index].read;
+          
           
         }
       });
 }
-
-    
-
-//addBookToLibrary.prototype = Object.create(Book.prototype);
-
 
 window.onload = () => {
 
